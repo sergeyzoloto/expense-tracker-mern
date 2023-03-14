@@ -7,10 +7,12 @@ export const TransactionList = () => {
 
   return (
     <>
-      <div>TransactionList</div>
-      {transactions.map((transaction) => (
-        <Transaction transaction={transaction} key={transaction.id} />
-      ))}
+      <div className="list">
+        <h3>History</h3>
+        {transactions.map((transaction) => (
+          <Transaction transaction={transaction} key={transaction.id} />
+        ))}
+      </div>
     </>
   );
 };
