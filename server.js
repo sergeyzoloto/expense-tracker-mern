@@ -2,12 +2,19 @@ import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
 import morgan from 'morgan';
+import connectDB from './config/db.js';
 
-dotenv.config({ path: './config/config.env' });
+dotenv.config({ path: './config/.env' });
+
+connectDB();
+
+import transactions from './routes/transactions.js';
 
 const app = express();
 
-app.get('/', (request, result) => result.send('Hello'));
+app.use(express.json()); // that allows us to use the parser
+
+app.use('/api/v1/transactions', transactions);
 
 const PORT = process.env.PORT || 5000;
 
