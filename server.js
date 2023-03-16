@@ -1,4 +1,5 @@
 import path from 'path';
+import url from 'url';
 import express from 'express';
 import dotenv from 'dotenv';
 import colors from 'colors';
@@ -23,9 +24,11 @@ app.use('/api/v1/transactions', transactions);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
-  app.get('*', (request, response) =>
-    response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')),
-  );
+  app.get('*', (request, response) => {
+    const __filename = url.fileURLToPath(import.meta.url);
+    const __dirname = path.dirname(__filename);
+    response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
 }
 
 const PORT = process.env.PORT || 5000;

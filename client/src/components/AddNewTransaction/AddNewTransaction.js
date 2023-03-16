@@ -10,12 +10,7 @@ export const AddNewTransaction = () => {
   const onSubmit = (event) => {
     event.preventDefault();
 
-    // Generate random ID
-    function generateID() {
-      return Math.floor(Math.random() * 100000000);
-    }
-
-    const newTransaction = { id: generateID(), text, amount: +amount };
+    const newTransaction = { text, amount: +amount };
 
     addTransaction(newTransaction);
   };
