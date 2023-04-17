@@ -11,6 +11,7 @@ dotenv.config({ path: './config/.env' });
 connectDB();
 
 import transactions from './routes/transactions.js';
+import users from './routes/users.js';
 
 const app = express();
 
@@ -21,6 +22,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 app.use('/api/v1/transactions', transactions);
+app.use('/api/v1/users', users);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
