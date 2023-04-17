@@ -16,6 +16,9 @@ export default function AppReducer(state, action) {
       };
     case 'GET_TRANSACTIONS':
       return { ...state, loading: false, transactions: action.payload };
+    case 'CLEAR_TRANSACTIONS':
+      return { ...state, loading: false, transactions: [] };
+
     case 'TRANSACTION_ERROR':
       return { ...state, loading: false, transactions: action.payload };
 

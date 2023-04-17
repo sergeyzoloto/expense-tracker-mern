@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Transaction } from './Transaction';
-import { GlobalContext } from '../../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalContext';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
 export const TransactionList = () => {

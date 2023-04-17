@@ -14,6 +14,14 @@ const TransactionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  user_id: {
+    type: String,
+    required: true,
+  },
 });
 
 export default mongoose.model('Transaction', TransactionSchema);

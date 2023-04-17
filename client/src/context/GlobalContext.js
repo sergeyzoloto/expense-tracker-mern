@@ -38,6 +38,18 @@ export const GlobalProvider = ({ children }) => {
       });
     }
   }
+  async function clearTransactions() {
+    try {
+      dispatch({
+        type: 'CLEAR_TRANSACTIONS',
+      });
+    } catch (error) {
+      dispatch({
+        type: 'TRANSACTION_ERROR',
+        payload: error.response.data.error,
+      });
+    }
+  }
 
   async function deleteTransaction(id, user) {
     try {
@@ -90,6 +102,7 @@ export const GlobalProvider = ({ children }) => {
         deleteTransaction,
         addTransaction,
         getTransactions,
+        clearTransactions,
       }}
     >
       {children}
