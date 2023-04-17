@@ -17,9 +17,15 @@ export const GlobalProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   // Actions
-  async function getTransactions() {
+  async function getTransactions(user) {
     try {
-      const response = await axios.get('/api/v1/transactions');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      const response = await axios.get('/api/v1/transactions', config);
 
       dispatch({
         type: 'GET_TRANSACTIONS',
@@ -33,9 +39,15 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function deleteTransaction(id) {
+  async function deleteTransaction(id, user) {
     try {
-      await axios.delete(`/api/v1/transactions/${id}`);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          'Content-Type': 'application/json',
+        },
+      };
+      await axios.delete(`/api/v1/transactions/${id}`, config);
       dispatch({ type: 'DELETE_TRANSACTION', payload: id });
     } catch (error) {
       dispatch({
@@ -45,9 +57,12 @@ export const GlobalProvider = ({ children }) => {
     }
   }
 
-  async function addTransaction(transaction) {
+  async function addTransaction(transaction, user) {
     const config = {
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        'Content-Type': 'application/json',
+      },
     };
 
     try {
