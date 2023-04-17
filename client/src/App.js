@@ -5,18 +5,21 @@ import { IncomeExpenses } from './components/IncomeExpenses./IncomeExpenses';
 import { TransactionList } from './components/TransactionList/TransactionList';
 import { AddNewTransaction } from './components/AddNewTransaction/AddNewTransaction';
 import { GlobalProvider } from './context/GlobalState';
+import { AuthContextProvider } from './context/AuthContext';
 
 function App() {
   return (
-    <GlobalProvider>
-      <Header />
-      <div className="container">
-        <Balance />
-        <IncomeExpenses />
-        <TransactionList />
-        <AddNewTransaction />
-      </div>
-    </GlobalProvider>
+    <AuthContextProvider>
+      <GlobalProvider>
+        <Header />
+        <div className="container">
+          <Balance />
+          <IncomeExpenses />
+          <TransactionList />
+          <AddNewTransaction />
+        </div>
+      </GlobalProvider>
+    </AuthContextProvider>
   );
 }
 
