@@ -4,7 +4,7 @@ import {
   getTransactions,
   addTransaction,
   deleteTransaction,
-} from '../controllers/transactions.js';
+} from '../controllers/transactionsController.js';
 
 transactions.get('/', getTransactions);
 transactions.post('/', addTransaction);
