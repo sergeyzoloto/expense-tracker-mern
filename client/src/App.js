@@ -1,22 +1,29 @@
 import './App.css';
 import { Header } from './components/Header/Header';
-import { Balance } from './components/Balance/Balance';
-import { IncomeExpenses } from './components/IncomeExpenses./IncomeExpenses';
-import { TransactionList } from './components/TransactionList/TransactionList';
-import { AddNewTransaction } from './components/AddNewTransaction/AddNewTransaction';
-import { GlobalProvider } from './context/GlobalState';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import Home from './pages/Home.js';
+import Login from './pages/Login.js';
+import Signup from './pages/Signup.js';
+import { useAuthContext } from './hooks/useAuthContext';
 
 function App() {
+  const { user } = useAuthContext();
+
   return (
-    <GlobalProvider>
+    <BrowserRouter>
       <Header />
-      <div className="container">
-        <Balance />
-        <IncomeExpenses />
-        <TransactionList />
-        <AddNewTransaction />
-      </div>
-    </GlobalProvider>
+      <Routes>
+        <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+        <Route
+          path="/login"
+          element={!user ? <Login /> : <Navigate to="/" />}
+        />
+        <Route
+          path="/signup"
+          element={!user ? <Signup /> : <Navigate to="/" />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

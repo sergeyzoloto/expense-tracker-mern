@@ -1,18 +1,26 @@
 import React, { useContext, useState } from 'react';
-import { GlobalContext } from '../../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalContext';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export const AddNewTransaction = () => {
   const [text, setText] = useState('');
   const [amount, setAmount] = useState(0);
+  const [error, setError] = useState(null);
+  const { user } = useAuthContext();
 
   const { addTransaction } = useContext(GlobalContext);
 
   const onSubmit = (event) => {
     event.preventDefault();
 
+    if (!user) {
+      setError('You must be logged in');
+      return;
+    }
+
     const newTransaction = { text, amount: +amount };
 
-    addTransaction(newTransaction);
+    addTransaction(newTransaction, user);
   };
 
   return (
@@ -42,6 +50,7 @@ export const AddNewTransaction = () => {
           />
         </div>
         <button className="btn">Add transaction</button>
+        {error && <div className="error">{error}</div>}
       </form>
     </>
   );

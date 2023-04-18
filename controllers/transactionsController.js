@@ -5,7 +5,8 @@ import Transaction from '../models/Transactions.js';
 // @access  Public
 export async function addTransaction(request, response, next) {
   try {
-    const transaction = await Transaction.create(request.body);
+    const user_id = request.user._id;
+    const transaction = await Transaction.create({ ...request.body, user_id });
     return response.status(201).json({
       success: true,
       data: transaction,
@@ -57,7 +58,8 @@ export async function deleteTransaction(request, response, next) {
 // @access  Public
 export async function getTransactions(request, response, next) {
   try {
-    const transactions = await Transaction.find();
+    const user_id = request.user._id;
+    const transactions = await Transaction.find({ user_id });
     return response.status(200).json({
       success: true,
       count: transactions.length,

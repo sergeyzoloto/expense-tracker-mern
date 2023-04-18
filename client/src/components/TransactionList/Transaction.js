@@ -1,9 +1,17 @@
 import React, { useContext } from 'react';
-import { GlobalContext } from '../../context/GlobalState';
+import { GlobalContext } from '../../context/GlobalContext';
 import { numberWithCommas } from '../../utils/format';
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 export const Transaction = ({ transaction }) => {
   const { deleteTransaction } = useContext(GlobalContext);
+  const { user } = useAuthContext();
+
+  const handleClick = (event) => {
+    event.preventDefault();
+    if (!user) return;
+    deleteTransaction(transaction._id, user);
+  };
 
   const sign = transaction.amount < 0 ? '-' : '+';
 
@@ -14,12 +22,7 @@ export const Transaction = ({ transaction }) => {
         <span>
           {sign}${numberWithCommas(Math.abs(transaction.amount))}
         </span>
-        <button
-          onClick={() => {
-            deleteTransaction(transaction._id);
-          }}
-          className="delete-btn"
-        >
+        <button onClick={handleClick} className="delete-btn">
           x
         </button>
       </li>
