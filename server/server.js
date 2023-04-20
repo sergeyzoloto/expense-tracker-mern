@@ -29,7 +29,9 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (request, response) => {
     const __filename = url.fileURLToPath(import.meta.url);
     const __dirname = path.dirname(__filename);
-    response.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    response.sendFile(
+      path.resolve(__dirname, '..', 'client', 'build', 'index.html'),
+    );
   });
 }
 
