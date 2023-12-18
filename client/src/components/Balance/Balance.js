@@ -4,8 +4,15 @@ import { numberWithCommas } from '../../utils/format';
 
 export const Balance = () => {
   const { transactions } = useContext(GlobalContext);
-  const amounts = transactions.map((transaction) => transaction.amount);
-  const total = amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
+  const calculateTotal = () => {
+    if (transactions && transactions.amount > 0) {
+      const amounts = transactions.map((transaction) => transaction.amount);
+      return amounts.reduce((acc, item) => (acc += item), 0).toFixed(2);
+    } else {
+      return 0;
+    }
+  };
+  const total = calculateTotal();
 
   return (
     <>

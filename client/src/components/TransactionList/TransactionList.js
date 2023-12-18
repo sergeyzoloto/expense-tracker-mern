@@ -21,7 +21,7 @@ export const TransactionList = () => {
         <Transaction transaction={transaction} key={transaction._id} />
       ));
     } else {
-      return null;
+      return <p>No transactions</p>;
     }
   };
 
@@ -29,11 +29,7 @@ export const TransactionList = () => {
     <>
       <div className="list">
         <h3>History</h3>
-        {transactions.length === 0 ? (
-          <p>No transactions</p>
-        ) : (
-          renderTransactions(transactions)
-        )}
+        {renderTransactions(transactions)}
       </div>
     </>
   );

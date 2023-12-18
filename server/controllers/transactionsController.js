@@ -58,8 +58,7 @@ export async function deleteTransaction(request, response, next) {
 // @access  Public
 export async function getTransactions(request, response, next) {
   try {
-    const email = request.user.email;
-
+    const user_id = request.user.user_id;
     const transactions = await Transaction.find({ user_id });
     return response.status(200).json({
       success: true,

@@ -20,7 +20,7 @@ export default function AppReducer(state, action) {
       return { ...state, loading: false, transactions: [] };
 
     case 'TRANSACTION_ERROR':
-      return { ...state, loading: false, transactions: action.payload };
+      return { ...state, loading: false, transactions: [] };
 
     default:
       return state;

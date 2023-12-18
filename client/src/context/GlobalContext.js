@@ -34,7 +34,7 @@ export const GlobalProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: error.response.data.error,
+        payload: error.response.error,
       });
     }
   }
@@ -46,7 +46,7 @@ export const GlobalProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: error.response.data.error,
+        payload: error.response.data,
       });
     }
   }
@@ -64,7 +64,7 @@ export const GlobalProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: error.response.data.error,
+        payload: error.response.data,
       });
     }
   }
@@ -88,7 +88,7 @@ export const GlobalProvider = ({ children }) => {
     } catch (error) {
       dispatch({
         type: 'TRANSACTION_ERROR',
-        payload: error.response.data.error,
+        payload: error.response.data,
       });
     }
   }
