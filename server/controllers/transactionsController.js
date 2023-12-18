@@ -24,7 +24,7 @@ export async function addTransaction(request, response, next) {
     }
     return response.status(500).json({
       success: false,
-      error: 'Server Error',
+      error: `${error.message}`,
     });
   }
 }
@@ -48,7 +48,7 @@ export async function deleteTransaction(request, response, next) {
   } catch (error) {
     return response.status(500).json({
       success: false,
-      error: 'Server Error',
+      error: `${error.message}`,
     });
   }
 }
@@ -58,7 +58,8 @@ export async function deleteTransaction(request, response, next) {
 // @access  Public
 export async function getTransactions(request, response, next) {
   try {
-    const user_id = request.user._id;
+    const email = request.user.email;
+
     const transactions = await Transaction.find({ user_id });
     return response.status(200).json({
       success: true,
@@ -68,7 +69,7 @@ export async function getTransactions(request, response, next) {
   } catch (error) {
     return response.status(500).json({
       success: false,
-      error: 'Server Error',
+      error: `${error.message}`,
     });
   }
 }
